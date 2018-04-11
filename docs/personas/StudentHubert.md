@@ -1,6 +1,6 @@
 # Hubert Hubertson | Student
 
-![Portrait of Hubert Hubertson](hubertStudent.png)
+![Portrait of Hubert Hubertson](hubertStudent.jpg)
 
 **_Age:_** 22 • **_Nationality:_** german
 
