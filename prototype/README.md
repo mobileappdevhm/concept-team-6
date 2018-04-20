@@ -1,4 +1,4 @@
-# prototype
+# Courses in English | Vertical prototype
 
 Vertical prototype of the CiE application.
 
