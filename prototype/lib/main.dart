@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prototype/ui/widgets/scenery_widget.dart';
+import 'package:prototype/ui/widgets/scenery_widget/scenery_widget.dart';
 
 void main() => runApp(new MyApp());
 
@@ -55,8 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(title: const Text("The sun is shining")),
-        body: new SceneryWrapper(new Text("Hallo Welt"))
+        body: new SceneryWrapperWidget(new Text("Hallo Welt"))
     );
   }
 }
