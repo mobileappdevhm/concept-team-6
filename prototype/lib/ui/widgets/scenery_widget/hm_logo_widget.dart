@@ -83,7 +83,7 @@ class HMLogoPainter extends CustomPainter {
    * The red gradient of the HM Logo.
    */
   static const LinearGradient logoGradient = const LinearGradient(
-      begin: Alignment.centerLeft, end: Alignment.centerRight, colors: [Color.fromRGBO(154, 16, 51, 1.0), Color.fromRGBO(228, 0, 0, 1.0)], stops: [0.0, 1.0]);
+      begin: Alignment.centerLeft, end: Alignment.centerRight, colors: const [const Color.fromRGBO(154, 16, 51, 1.0), const Color.fromRGBO(228, 0, 0, 1.0)], stops: const [0.0, 1.0]);
 
   double _scale;
 
