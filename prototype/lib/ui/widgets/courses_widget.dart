@@ -1,110 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:prototype/logic/DataBaseInterface.dart';
+import 'package:prototype/logic/DataFactory.dart';
+import 'package:prototype/logic/category.dart';
+import 'package:prototype/ui/widgets/tag_widget.dart';
 
 class CoursesWidget extends StatefulWidget {
-	@override
-	CoursesWidgetState createState() => new CoursesWidgetState();
+  @override
+  CoursesWidgetState createState() => new CoursesWidgetState();
 }
 
 class CoursesWidgetState extends State<CoursesWidget> {
+  String displayedString1 = "What are you";
+  String boldString = "interested";
+  String displayedString2 = "in?";
 
-	String displayedString1 = "What are you";
-	String boldString = "interested";
-	String displayedString2 = "in?";
+  List<TagWidget> tagWidgets = <TagWidget>[];
 
-	@override
-	Widget build(BuildContext context) {
-		return new Scaffold(
-			//appBar: new AppBar(title: new Text("StatefulWidget"), backgroundColor: Colors.deepOrange),
-			body: new Container(
-				child: new Center(
-					child: new Column(
-						mainAxisAlignment: MainAxisAlignment.center,
-						children: <Widget>[
-							new Text(displayedString1, style: new TextStyle(fontSize: 30.0)),
-							new Text(boldString, style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)),
-							new Text(displayedString2, style: new TextStyle(fontSize: 30.0)),
-							new Padding(padding: new EdgeInsets.all(10.0)),
-							new ButtonBar(
-								alignment: MainAxisAlignment.center, 
-								mainAxisSize: MainAxisSize.min,
-								children: [
-									new RaisedButton(
-										child: new Text("Computer Science"),
-										textColor: Colors.white,
-										color: const Color(0xFF00a0d2),
-										onPressed: () {}
+  @override
+  void initState() {
+    DataBaseInterface dataProvider = DataFactory.getDataProvider();
 
-									),
-									new RaisedButton(
-										child: new Text("Mechatronics"),
-										textColor: Colors.white,
-										color: const Color(0xFF0188c8),
-										onPressed: () {}
-									)
-								]
-							),
-							new ButtonBar(
-								alignment: MainAxisAlignment.center,
-								mainAxisSize: MainAxisSize.min,
-								children: [
-									new RaisedButton(
-										child: new Text("Electronics"),
-										textColor: Colors.white,
-										color: const Color(0xFF00aab5),
-										onPressed: () {}
+    dataProvider.getCategories().then((categories) {
+      dataProvider.getFaculties().then((faculties) {
+        tagWidgets.clear();
 
-									),
-									new RaisedButton(
-										child: new Text("Economy"),
-										textColor: Colors.white,
-										color: const Color(0xFF009b71),
-										onPressed: () {}
-									),
-									new RaisedButton(
-										child: new Text("Tourism"),
-										textColor: Colors.white,
-										color: const Color(0xFFa62a57),
-										onPressed: () {}
-									)
-								]
-							),
-							new ButtonBar(
-								alignment: MainAxisAlignment.center,
-								mainAxisSize: MainAxisSize.min,
-								children: [
-									new RaisedButton(
-										child: new Text("Design"),
-										textColor: Colors.white,
-										color: const Color(0xFF113b46),
-										onPressed: () {}
+        for (Category c in categories) {
+          TagWidget widget = new TagWidget(c.name, faculties[c.faculties[0]].color);
 
-									),
-									new RaisedButton(
-										child: new Text("Healthcare"),
-										textColor: Colors.white,
-										color: const Color(0xFFec7404),
-										onPressed: () {}
-									)
-								]
-							),
-							new Padding(padding: new EdgeInsets.all(5.0)),
-							new RaisedButton(
-								child: new Text("Continue..."),
-								textColor: Colors.white,
-								color: const Color(0xFF333333),
-								onPressed: () {} //new Page
-							),
-							new IconButton(
-								icon: new Icon(Icons.favorite, color: Colors.red),
-								tooltip: 'Checked Course',
-								onPressed: () {
+          widget.addListener((selected) {
+            _onTagSelectionChanged(c, selected);
+          });
 
-								}
-							)
-						]
-					)
-				)
-			)
-		);
-	}
+          tagWidgets.add(widget);
+        }
+
+        setState(() {}); // Cause rebuild
+      });
+    });
+  }
+
+  void _onTagSelectionChanged(Category category, bool selected) {
+    print("Category ${category.name} has been ${selected ? "selected" : "deselected"}.");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        body: new Center(
+            child: new Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      new Column(children: <Widget>[
+        new Text(displayedString1, style: new TextStyle(fontSize: 30.0)),
+        new Text(boldString, style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)),
+        new Text(displayedString2, style: new TextStyle(fontSize: 30.0))
+      ]),
+      new Container(child: new Wrap(children: tagWidgets, alignment: WrapAlignment.center, spacing: 10.0, runSpacing: 10.0), padding: new EdgeInsets.all(30.0)),
+      new RaisedButton(child: new Text("Continue..."), textColor: Colors.white, color: const Color(0xFF333333), onPressed: () {} //new Page
+          ),
+      new IconButton(icon: new Icon(Icons.favorite, color: Colors.red), tooltip: 'Checked Course', onPressed: () {})
+    ])));
+  }
 }
