@@ -11,9 +11,12 @@ class AvailabilityIcon extends StatelessWidget{
       children: <Widget>[
         new Text(
           availab.toString(),
+          textAlign: TextAlign.right,
           style: new TextStyle(
-            color: availab == Availability.green ? Colors.green : availab == Availability.yellow ? Colors.yellow : Colors.red
+            color: availab == Availability.green ? Colors.green : availab == Availability.yellow ? Colors.yellow : Colors.red,
+            fontSize: 8.0
           ),
+
         ),
         //TODO: Add an icon with the color
         //new Icon();
