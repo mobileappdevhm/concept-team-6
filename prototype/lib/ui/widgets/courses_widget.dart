@@ -96,7 +96,10 @@ class CoursesWidgetState extends State<CoursesWidget> {
 							),
 							new IconButton(
 								icon: new Icon(Icons.favorite, color: Colors.red),
-								tooltip: 'Checked Course'
+								tooltip: 'Checked Course',
+								onPressed: () {
+
+								}
 							)
 						]
 					)

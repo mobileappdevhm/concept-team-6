@@ -3,8 +3,14 @@ import 'package:prototype/logic/DataBaseMock.dart';
 
 class DataFactory{
 
-  DataBaseInterface getDataProvider() {
-    return new DataBaseMock();
+  static DataBaseInterface dataBase;
+
+  static DataBaseInterface getDataProvider() {
+    if (dataBase == null) {
+      dataBase = new DataBaseMock();
+    }
+
+    return dataBase;
   }
 
 }

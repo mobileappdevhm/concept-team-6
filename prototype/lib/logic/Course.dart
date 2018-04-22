@@ -1,22 +1,31 @@
 class Course{
-  String _title;
-  String _lecturer;
-  String _description;
-  num _courseID;
-  DateTime _begin;
-  DateTime _end;
-  bool bookmarked;
 
-  Course(String title, String lecturer, String description, DateTime begin, DateTime end){
-    this._title = title;
-    this._lecturer = lecturer;
-    this._description = description;
-    this._begin = begin;
-    this._end = end;
-    this._courseID = this.hashCode;
-  }
+  String title;
+  String lecturer;
+  int sws;
+  double ects;
+  int usCredits;
+  String category;
+  String level;
 
-  num getID(){
-    return _courseID;
-  }
+  CourseDescription description;
+
+}
+
+class CourseDescription {
+
+  int department = 0;
+  String title;
+  String objective;
+  String prerequisites;
+  String recommendedReading;
+  String teachingMethods;
+  String assessmentMethods;
+  String language;
+  String lecturerNames;
+  String email;
+  String link;
+  String courseContent;
+  String remarks;
+
 }
