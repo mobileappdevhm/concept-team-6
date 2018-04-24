@@ -15,7 +15,7 @@ class SceneryWrapperWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return new Column(children: <Widget>[new SizedBox(child: new SceneryWidget(), height: size.height * 0.3, width: size.width), new Expanded(child: _child)]);
+    return new Column(children: <Widget>[new SizedBox(child: new SceneryWidget(true), height: size.height * 0.3, width: size.width), new Expanded(child: _child)]);
   }
 }
 
@@ -23,8 +23,12 @@ class SceneryWrapperWidget extends StatelessWidget {
  * Scenery widget showing a nice and sound scenery for the user to enjoy themselves.
  */
 class SceneryWidget extends StatefulWidget {
+  final bool _showLogo;
+
+  SceneryWidget(this._showLogo);
+
   @override
-  State<StatefulWidget> createState() => new _SceneryWidgetState();
+  State<StatefulWidget> createState() => new _SceneryWidgetState(_showLogo);
 }
 
 /**
@@ -37,6 +41,10 @@ class _SceneryWidgetState extends State<SceneryWidget> with TickerProviderStateM
   List<Animation<double>> anims = <Animation<double>>[];
   List<AnimationController> controllers = <AnimationController>[];
 
+  final bool _showLogo;
+
+  _SceneryWidgetState(this._showLogo);
+
   @override
   void initState() {
     super.initState();
@@ -44,22 +52,24 @@ class _SceneryWidgetState extends State<SceneryWidget> with TickerProviderStateM
     var rng = new Random();
 
     controllers.add(new AnimationController(vsync: this, duration: new Duration(seconds: max(MIN_DURATION, rng.nextInt(MAX_DURATION)))));
-    anims.add(new Tween(begin: rng.nextDouble(), end: rng.nextDouble()).animate(controllers[0])..addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controllers[0].reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        controllers[0].forward();
-      }
-    }));
+    anims.add(new Tween(begin: rng.nextDouble(), end: rng.nextDouble()).animate(controllers[0])
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          controllers[0].reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          controllers[0].forward();
+        }
+      }));
 
     controllers.add(new AnimationController(vsync: this, duration: new Duration(seconds: max(MIN_DURATION, rng.nextInt(MAX_DURATION)))));
-    anims.add(new Tween(begin: rng.nextDouble(), end: rng.nextDouble()).animate(controllers[1])..addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controllers[1].reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        controllers[1].forward();
-      }
-    }));
+    anims.add(new Tween(begin: rng.nextDouble(), end: rng.nextDouble()).animate(controllers[1])
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          controllers[1].reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          controllers[1].forward();
+        }
+      }));
 
     for (var c in controllers) {
       c.forward();
@@ -68,15 +78,22 @@ class _SceneryWidgetState extends State<SceneryWidget> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double minSize = min(size.width, size.height);
+    return new LayoutBuilder(builder: (BuildContext ctx, BoxConstraints constraints) {
+      double minSize = min(constraints.biggest.width, constraints.biggest.height);
 
-    return new Stack(children: <Widget>[
-      new CustomPaint(painter: new _Sky()),
-      new Container(child: new CloudWidget(minSize / 5, anims[0]), alignment: Alignment.centerLeft),
-      new HMLogoWidget(scale: 0.6),
-      new Container(child: new CloudWidget(minSize / 4, anims[1]), alignment: Alignment.centerLeft)
-    ], fit: StackFit.expand);
+      List<Widget> widgets = <Widget>[];
+
+      widgets.add(new CustomPaint(painter: new _Sky()));
+      widgets.add(new Container(child: new CloudWidget(minSize * 0.25, anims[0]), alignment: Alignment.centerLeft));
+
+      if (_showLogo) {
+        widgets.add(new HMLogoWidget(scale: 0.6));
+      }
+
+      widgets.add(new Container(child: new CloudWidget(minSize * 0.3, anims[1]), alignment: Alignment.centerLeft));
+
+      return new Stack(children: widgets, fit: StackFit.expand);
+    });
   }
 
   dispose() {

@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
-import 'package:prototype/ui/widgets/line_separator.dart';
+import 'package:flutter/widgets.dart';
+import 'package:prototype/ui/factory/ui_factory.dart';
+import 'package:prototype/ui/widgets/course_list_widget.dart';
 
-class CourseList extends StatelessWidget{
+class CourseList extends StatelessWidget {
 
   @override
-  build(BuildContext context){
-    return new ListView(
-
-    );
+  Widget build(BuildContext context) {
+    return UIFactory.getAppScaffold(body: new CourseListWidget());
   }
+
 }
