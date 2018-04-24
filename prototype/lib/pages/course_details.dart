@@ -1,40 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:meta/meta.dart';
 import 'package:prototype/logic/Course.dart';
-import 'package:prototype/ui/widgets/selection_drawer.dart';
+import 'package:prototype/logic/faculty.dart';
+import 'package:prototype/ui/factory/ui_factory.dart';
+import 'package:prototype/ui/widgets/course_detail_widget.dart';
 
 class CourseDetails extends StatelessWidget {
-
   final Course course;
+  final Faculty faculty;
 
-  CourseDetails({
-    @required Course course
-  }) : this.course = course;
+  CourseDetails(this.course, this.faculty);
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new Column(
-          children: <Widget>[
-            new Expanded(
-              child: new Row(
-                children: <Widget>[
-                  new Expanded(
-                    child: new Container(
-                      child: new Text(
-                        "CourseDetail",
-                        textAlign: TextAlign.center,
-                        style: new TextStyle(fontSize: 40.0),
-                      ),
-                      alignment: AlignmentDirectional.center,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        drawer: new SelectionDrawer());
+    Size size = MediaQuery.of(context).size;
+    double vw = size.width / 100;
+
+    return UIFactory.getAppScaffold(
+        body: new SingleChildScrollView(
+            child: new CourseDetailWidget(course, faculty, false, false, (isFavorized) {
+              print("Favorized $isFavorized");
+            }, (isSelected) {
+              print("Selected: $isSelected");
+            }),
+            padding: EdgeInsets.all(vw * 5)));
   }
 }

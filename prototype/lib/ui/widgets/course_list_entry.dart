@@ -72,13 +72,14 @@ class _CourseListEntryState extends State {
               new Row(children: <Widget>[
                 new Expanded(
                     child: new Align(
-                        child: new Text("FK${course.description.department}",
+                        child: new Text("FK ${course.description.department}",
                             style: new TextStyle(fontWeight: FontWeight.bold, color: faculty != null ? faculty.color : Colors.grey), textScaleFactor: 1.2),
                         alignment: Alignment.centerLeft)),
                 new Expanded(
                     child: new Align(
                         child: new IconButton(
-                            icon: new Icon(_favorite ? Icons.favorite : Icons.favorite_border, size: 7 * vw),
+                            icon: new Icon(_favorite ? Icons.favorite : Icons.favorite_border),
+                            iconSize: 7 * vw,
                             color: HEART,
                             onPressed: () {
                               _toggleFav();

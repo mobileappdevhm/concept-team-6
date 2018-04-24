@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:prototype/logic/Course.dart';
 import 'package:prototype/logic/DataFactory.dart';
+import 'package:prototype/logic/faculty.dart';
 import 'package:prototype/pages/course_details.dart';
 import 'package:prototype/ui/widgets/course_list_entry.dart';
 
@@ -23,7 +24,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
             entries.add(new CourseListEntry(c, faculties[c.description.department], (isFavorite) {
               onFavorized(c, isFavorite);
             }, () {
-              onEntryTap(c);
+              onEntryTap(c, faculties[c.description.department]);
             }));
           }
         });
@@ -44,7 +45,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
     print("${course.title} has been ${isFavorite ? "favorized" : "unfavorized"}!");
   }
 
-  void onEntryTap(Course course) {
-    Navigator.push(context, new MaterialPageRoute(builder: (context) => new CourseDetails(course: course)));
+  void onEntryTap(Course course, Faculty faculty) {
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new CourseDetails(course, faculty)));
   }
 }
