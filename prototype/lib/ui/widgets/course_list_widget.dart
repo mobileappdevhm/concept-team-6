@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:prototype/logic/Course.dart';
 import 'package:prototype/logic/DataFactory.dart';
-import 'package:prototype/pages/CourseDetails.dart';
+import 'package:prototype/pages/course_details.dart';
 import 'package:prototype/ui/widgets/course_list_entry.dart';
 
 class CourseListWidget extends StatefulWidget {

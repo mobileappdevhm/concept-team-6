@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prototype/logic/Course.dart';
-import 'package:prototype/pages/CourseDetails.dart';
+import 'package:prototype/pages/course_details.dart';
 import 'package:prototype/pages/course_list.dart';
 import 'package:prototype/pages/login.dart';
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Courses in English',
+      title: "Courses in English",
       home: new LoginPage(),
       routes: <String,WidgetBuilder>{
         "/CourseList": (BuildContext context) => new CourseList(),
