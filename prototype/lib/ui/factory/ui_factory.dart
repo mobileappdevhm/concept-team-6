@@ -14,7 +14,7 @@ class UIFactory {
             centerTitle: true,
             flexibleSpace: new SceneryWidget(false)),
         body: body,
-        drawer: new SelectionDrawer(),
+        //drawer: new SelectionDrawer(),
         bottomNavigationBar: new BottomNavigationBar(items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(icon: new Icon(Icons.import_contacts), title: new Text("Courses")),
           new BottomNavigationBarItem(icon: new Icon(Icons.favorite_border), title: new Text("Favorites")),
