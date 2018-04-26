@@ -14,17 +14,24 @@ class FavouriteListWidget extends StatefulWidget {
 class _FavouriteListWidgetState extends State<FavouriteListWidget> {
   List<CourseListEntry> entries;
 
-  _FavouriteListWidgetState() {
-    _refresh();
-  }
-
   @override
   Widget build(BuildContext context) {
     if (entries != null) {
-      return new ListView(children: entries);
+      if (entries.isNotEmpty) {
+        return new ListView(children: entries);
+      } else {
+        return new Center(child: new Text("No favorites yet."));
+      }
     } else {
       return new Center(child: new Text("Loading..."));
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _refresh();
   }
 
   void onFavorized(Course course, bool isFavorite) {
@@ -36,7 +43,7 @@ class _FavouriteListWidgetState extends State<FavouriteListWidget> {
     _refresh();
   }
 
-  void _refresh(){
+  void _refresh() {
     DataFactory.getDataProvider().getCourses().then((courses) {
       DataFactory.getDataProvider().getFaculties().then((faculties) {
         setState(() {
@@ -44,8 +51,7 @@ class _FavouriteListWidgetState extends State<FavouriteListWidget> {
 
           for (Course c in courses) {
             if (c.favourite) {
-              entries.add(new CourseListEntry(
-                  c, faculties[c.description.department], (isFavorite) {
+              entries.add(new CourseListEntry(c, faculties[c.description.department], (isFavorite) {
                 onFavorized(c, isFavorite);
               }, () {
                 onEntryTap(c, faculties[c.description.department]);
@@ -58,9 +64,6 @@ class _FavouriteListWidgetState extends State<FavouriteListWidget> {
   }
 
   void onEntryTap(Course course, Faculty faculty) {
-    Navigator.push(
-        context,
-        new MaterialPageRoute(
-            builder: (context) => new CourseDetails(course, faculty)));
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new CourseDetails(course, faculty)));
   }
 }
