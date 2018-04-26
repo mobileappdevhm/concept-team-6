@@ -12,4 +12,6 @@ abstract class DataBaseInterface{
 
   Future<List<Category>> getCategories();
 
+  void setFavourite(Course course,bool favourite);
+
 }

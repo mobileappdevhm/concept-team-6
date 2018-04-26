@@ -7,7 +7,7 @@ class CourseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UIFactory.getAppScaffold(body: new CourseListWidget());
+    return UIFactory.getAppScaffold(body: new CourseListWidget(),context: context);
   }
 
 }

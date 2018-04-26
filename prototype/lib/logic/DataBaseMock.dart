@@ -70,6 +70,7 @@ class DataBaseMock implements DataBaseInterface {
         c.usCredits = item["usCredits"];
         c.category = item["category"];
         c.level = item["level"];
+        c.favourite = false;
 
         var description = item["description"];
 
@@ -103,7 +104,6 @@ class DataBaseMock implements DataBaseInterface {
     if (_courses == null) {
       await _future;
     }
-
     return _courses;
   }
 
@@ -115,5 +115,10 @@ class DataBaseMock implements DataBaseInterface {
   @override
   Future<List<Category>> getCategories() async {
     return CATEGORIES;
+  }
+
+  @override
+  void setFavourite(Course course, bool favourite){
+    _courses[_courses.indexOf(course)].favourite = favourite;
   }
 }

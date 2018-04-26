@@ -7,6 +7,7 @@ class Course{
   int usCredits;
   String category;
   String level;
+  bool favourite;
 
   CourseDescription description;
 

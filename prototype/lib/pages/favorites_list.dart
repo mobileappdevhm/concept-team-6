@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:prototype/ui/factory/ui_factory.dart';
 
-class FavouritList extends StatelessWidget{
+class FavouriteList extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return null;
+    return UIFactory.getAppScaffold(body: new FavouriteList(),context: context);
   }
 
 }

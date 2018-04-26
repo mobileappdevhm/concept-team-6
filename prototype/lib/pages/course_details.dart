@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:prototype/logic/Course.dart';
+import 'package:prototype/logic/DataFactory.dart';
 import 'package:prototype/logic/faculty.dart';
 import 'package:prototype/ui/factory/ui_factory.dart';
 import 'package:prototype/ui/widgets/course_detail_widget.dart';
@@ -18,11 +19,12 @@ class CourseDetails extends StatelessWidget {
 
     return UIFactory.getAppScaffold(
         body: new SingleChildScrollView(
-            child: new CourseDetailWidget(course, faculty, false, false, (isFavorized) {
+            child: new CourseDetailWidget(course, faculty, false, course.favourite, (thisCourse, isFavorized) {
               print("Favorized $isFavorized");
+              DataFactory.getDataProvider().setFavourite(thisCourse,isFavorized);
             }, (isSelected) {
               print("Selected: $isSelected");
             }),
-            padding: EdgeInsets.all(vw * 5)));
+            padding: EdgeInsets.all(vw * 5)),context: context);
   }
 }

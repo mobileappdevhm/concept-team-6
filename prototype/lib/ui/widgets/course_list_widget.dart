@@ -43,6 +43,8 @@ class _CourseListWidgetState extends State<CourseListWidget> {
 
   void onFavorized(Course course, bool isFavorite) {
     print("${course.title} has been ${isFavorite ? "favorized" : "unfavorized"}!");
+    DataFactory.getDataProvider().setFavourite(course, isFavorite);
+    course.favourite = isFavorite;
   }
 
   void onEntryTap(Course course, Faculty faculty) {

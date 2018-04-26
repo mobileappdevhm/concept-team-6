@@ -30,9 +30,9 @@ class SelectionDrawer extends StatelessWidget {
             },
           ),
           new ListTile(
-            title: new Text("CourseDetails"),
+            title: new Text("FavouriteList"),
             onTap: () {
-              Navigator.of(context).pushNamed("/CourseDetails");
+              Navigator.of(context).pushNamed("/FavouriteList");
             },
           )
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prototype/pages/course_list.dart';
+import 'package:prototype/pages/favorites_list.dart';
 import 'package:prototype/pages/login.dart';
 
 void main() => runApp(new MyApp());
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       routes: <String,WidgetBuilder>{
         "/CourseList": (BuildContext context) => new CourseList(),
         "/HomePage" : (BuildContext context) => new LoginPage(),
+        "/FavouriteList" : (Buildcontext) => new FavouriteList(),
       }
 
     );

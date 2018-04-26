@@ -5,7 +5,7 @@ import 'package:prototype/logic/faculty.dart';
 import 'package:prototype/ui/widgets/line_separator.dart';
 import 'package:prototype/ui/widgets/tag_widget.dart';
 
-typedef void FavListener(bool isFavorite);
+typedef void FavListener(Course course,bool isFavorite);
 typedef void SelectListener(bool isSelected);
 
 class CourseDetailWidget extends StatefulWidget {
@@ -88,8 +88,7 @@ class _CourseDetailWidgetState extends State<CourseDetailWidget> {
   void _toggleFavorized() {
     setState(() {
       _favorized = !_favorized;
-
-      favListener.call(_favorized);
+      favListener.call(this.course,_favorized);
     });
   }
 
