@@ -6,26 +6,41 @@ import 'package:prototype/logic/faculty.dart';
 import 'package:prototype/pages/course_details.dart';
 import 'package:prototype/ui/widgets/course_list_entry.dart';
 
+typedef bool Filter(Course course);
+
 class CourseListWidget extends StatefulWidget {
+  final Filter filter;
+
+  CourseListWidget({Filter filter}) : this.filter = filter;
+
   @override
-  State<StatefulWidget> createState() => new _CourseListWidgetState();
+  State<StatefulWidget> createState() => new _CourseListWidgetState(filter);
 }
 
 class _CourseListWidgetState extends State<CourseListWidget> {
+  final Filter filter;
+
   List<CourseListEntry> entries;
 
-  _CourseListWidgetState() {
+  _CourseListWidgetState(this.filter) {
     DataFactory.getDataProvider().getCourses().then((courses) {
       DataFactory.getDataProvider().getFaculties().then((faculties) {
         setState(() {
           entries = new List<CourseListEntry>();
 
           for (Course c in courses) {
-            entries.add(new CourseListEntry(c, faculties[c.description.department], (isFavorite) {
-              onFavorized(c, isFavorite);
-            }, () {
-              onEntryTap(c, faculties[c.description.department]);
-            }));
+            bool accept = true;
+            if (filter != null) {
+              accept = filter.call(c);
+            }
+
+            if (accept) {
+              entries.add(new CourseListEntry(c, faculties[c.description.department], (isFavorite) {
+                onFavorized(c, isFavorite);
+              }, () {
+                onEntryTap(c, faculties[c.description.department]);
+              }));
+            }
           }
         });
       });

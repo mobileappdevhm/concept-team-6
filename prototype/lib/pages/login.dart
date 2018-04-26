@@ -15,24 +15,15 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new SceneryWrapperWidget(
-        new LoginSelection(),
-
-      ),
+      body: new SceneryWrapperWidget(new Column(children: <Widget>[titleRow(), new Expanded(child: new LoginSelection())])),
       resizeToAvoidBottomPadding: false,
     );
   }
-
 }
 
-/*Container titleRow() {
-    return new Container(
-      child: new Text(
-        "Courses in English",
-        style: new TextStyle(
-            fontSize: 40.0, fontWeight: FontWeight.w700, color: Colors.grey),
-      ),
+Container titleRow() {
+  return new Container(
+      child: new Text("Courses in English", style: new TextStyle(fontWeight: FontWeight.w100, color: new Color(0xFF707070)), textScaleFactor: 2.5),
       alignment: AlignmentDirectional.center,
-      margin: EdgeInsets.symmetric(vertical: 20.0),
-    );
-  }*/
+      margin: EdgeInsets.symmetric(vertical: 20.0));
+}
