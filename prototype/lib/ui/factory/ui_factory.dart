@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:prototype/pages/course_list.dart';
+import 'package:prototype/pages/favorites_list.dart';
 import 'package:prototype/ui/widgets/scenery_widget/scenery_widget.dart';
 import 'package:prototype/ui/widgets/selection_drawer.dart';
 
@@ -16,7 +18,7 @@ class UIFactory {
             centerTitle: true,
             flexibleSpace: new SceneryWidget(false)),
         body: body,
-        drawer: new SelectionDrawer(),
+        //drawer: new SelectionDrawer(),
         bottomNavigationBar: new BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             new BottomNavigationBarItem(
@@ -33,10 +35,10 @@ class UIFactory {
           onTap: (index) {
             switch(index){
               case(0):
-                Navigator.of(context).popAndPushNamed("/CourseList");
+                Navigator.push(context,new MaterialPageRoute(builder: (context) => new CourseList(null)));
                 break;
               case(1):
-                Navigator.of(context).popAndPushNamed("/FavouriteList");
+                Navigator.push(context,new MaterialPageRoute(builder: (context) => new FavouriteList()));
                 break;
               case(2):
                 break;

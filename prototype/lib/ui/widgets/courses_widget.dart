@@ -17,8 +17,12 @@ class CoursesWidgetState extends State<CoursesWidget> {
 
   List<TagWidget> tagWidgets = <TagWidget>[];
 
+  Set<Category> selectedCategories = new Set<Category>();
+
   @override
   void initState() {
+    super.initState();
+
     DataBaseInterface dataProvider = DataFactory.getDataProvider();
 
     dataProvider.getCategories().then((categories) {
@@ -41,7 +45,11 @@ class CoursesWidgetState extends State<CoursesWidget> {
   }
 
   void _onTagSelectionChanged(Category category, bool selected) {
-    print("Category ${category.name} has been ${selected ? "selected" : "deselected"}.");
+    if (selected) {
+      selectedCategories.add(category);
+    } else {
+      selectedCategories.remove(category);
+    }
   }
 
   @override
@@ -65,7 +73,7 @@ class CoursesWidgetState extends State<CoursesWidget> {
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(100000.0)),
               color: const Color(0xFF333333),
               onPressed: () {
-                Navigator.push(context, new MaterialPageRoute(builder: (context) => new CourseList()));
+                Navigator.push(context, new MaterialPageRoute(builder: (context) => new CourseList(selectedCategories)));
               })
         ])));
   }

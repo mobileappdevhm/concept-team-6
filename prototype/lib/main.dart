@@ -13,13 +13,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: "Courses in English",
       home: new Scaffold(body: new LoginPage(),resizeToAvoidBottomPadding: false),
-      routes: <String,WidgetBuilder>{
-        "/CourseList": (BuildContext context) => new CourseList(),
-        "/HomePage" : (BuildContext context) => new LoginPage(),
-        "/FavouriteList" : (Buildcontext) => new FavouriteList(),
-      }
-
-    );
+      );
   }
 }
       
