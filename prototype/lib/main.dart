@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: "Courses in English",
-      home: new LoginPage(),
+      home: new Scaffold(body: new LoginPage(),resizeToAvoidBottomPadding: false),
       routes: <String,WidgetBuilder>{
         "/CourseList": (BuildContext context) => new CourseList(),
         "/HomePage" : (BuildContext context) => new LoginPage(),
