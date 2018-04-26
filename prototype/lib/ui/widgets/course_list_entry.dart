@@ -29,14 +29,15 @@ class _CourseListEntryState extends State {
   final FavListener favListener;
   final ClickCallback onClicked;
 
-  bool _favorite = false;
+  bool _favorite ;
 
-  _CourseListEntryState(this.course, this.faculty, this.favListener, this.onClicked);
+  _CourseListEntryState(this.course, this.faculty, this.favListener, this.onClicked){
+    _favorite = this.course.favourite;
+  }
 
   void _toggleFav() {
     setState(() {
       _favorite = !_favorite;
-
       favListener.call(_favorite);
     });
   }
