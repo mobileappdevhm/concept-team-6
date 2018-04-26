@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:prototype/pages/course_list.dart';
-import 'package:prototype/pages/favorites_list.dart';
 import 'package:prototype/pages/login.dart';
 
 void main() => runApp(new MyApp());
